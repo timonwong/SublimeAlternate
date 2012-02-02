@@ -1,0 +1,12 @@
+{
+    "alternate_extension_mappings" : [
+        {"ext": "h",    "alts": ["c", "cpp", "cxx", "cc"]},
+        {"ext": "hpp",  "alts": ["cpp"]},
+        {"ext": "hxx",  "alts": ["cxx"]},
+        {"ext": "hh",   "alts": ["cc"]},
+        {"ext": "c",    "alts": ["h"]},
+        {"ext": "cpp",  "alts": ["h", "hpp"]},
+        {"ext": "cxx",  "alts": ["h", "hxx"]},
+        {"ext": "cc",   "alts": ["h", "hh"]}
+    ]
+}

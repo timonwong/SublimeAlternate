@@ -1,0 +1,3 @@
+[
+    { "keys": ["alt+o"], "command": "alternate_file" }
+]
