@@ -6,9 +6,10 @@ provides simple ways to alternate files (like swithing .c to .h) by keyboard sho
 Installation
 ------------
 * Manual Install
-    - Go to your packages directory
-    - Type following commands:
-        + `git clone git://github.com/timonwong/SublimeAlternate.git Alternate`
+    1. Go to your packages directory
+    2. Type following commands::
+
+         `git clone git://github.com/timonwong/SublimeAlternate.git Alternate`
 
 Usage
 -----
