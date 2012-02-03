@@ -12,20 +12,20 @@
                 "children":
                 [
                     {
-                        "caption": "Alternate",
+                        "caption": "SublimeAlternate",
                         "children":
                         [
                             {
                                 "command": "open_file", "args":
                                 {
-                                    "file": "${packages}/Alternate/Alternate.sublime-settings"
+                                    "file": "${packages}/SublimeAlternate/SublimeAlternate.sublime-settings"
                                 },
                                 "caption": "Settings – Default"
                             },
                             {
                                 "command": "open_file", "args":
                                 {
-                                    "file": "${packages}/User/Alternate.sublime-settings"
+                                    "file": "${packages}/User/SublimeAlternate.sublime-settings"
                                 },
                                 "caption": "Settings – User"
                             },
@@ -33,14 +33,14 @@
                             {
                                 "command": "open_file", "args":
                                 {
-                                    "file": "${packages}/Alternate/Default.sublime-keymap"
+                                    "file": "${packages}/SublimeAlternate/Default.sublime-keymap"
                                 },
                                 "caption": "Key Bindings – Default"
                             },
                             {
                                 "command": "open_file", "args":
                                 {
-                                    "file": "${packages}/User/Alternate.sublime-keymap"
+                                    "file": "${packages}/User/SublimeAlternate.sublime-keymap"
                                 },
                                 "caption": "Key Bindings – User"
                             }

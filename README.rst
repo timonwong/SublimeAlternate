@@ -4,7 +4,7 @@ SublimeAlternate Plugin
 
 Introduction
 ============
-Alternate is a simple working in progress plugin for Sublime Text 2. It provides simple ways to alternate
+SublimeAlternate is a simple working in progress plugin for Sublime Text 2. It provides simple ways to alternate
 files (like swithing .c to .h) by keyboard shortcuts quickly.
 
 Installation

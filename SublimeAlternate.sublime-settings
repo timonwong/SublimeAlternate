@@ -1,5 +1,5 @@
 {
-    "alternate_extension_mappings" : [
+    "sublime_alternate_extension_mappings" : [
         {"ext": "h",    "alts": ["c", "cpp", "cxx", "cc"]},
         {"ext": "hpp",  "alts": ["cpp"]},
         {"ext": "hxx",  "alts": ["cxx"]},

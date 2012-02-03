@@ -20,28 +20,32 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 """
 
-import sublime, sublime_plugin
+import sublime
+import sublime_plugin
 import os.path
 
 g_alternate_mapping = {}
+
 
 def add_alternate_mapping(extension, alternates):
     global g_alternate_mapping
     g_alternate_mapping[extension] = alternates
 
+
 def load_settings():
-    settings = sublime.load_settings("Alternate.sublime-settings")
-    mappings = settings.get("alternate_extension_mappings", [])
+    settings = sublime.load_settings("SublimeAlternate.sublime-settings")
+    mappings = settings.get("sublime_alternate_extension_mappings", [])
     for mapping in mappings:
-        if not mapping.has_key("ext"):
+        if "ext" not in mapping:
             continue
-        if not mapping.has_key("alts"):
+        if "alts" not in mapping:
             continue
-        ext  = mapping["ext"]
+        ext = mapping["ext"]
         alts = mapping["alts"]
         add_alternate_mapping(ext, alts)
 
 load_settings()
+
 
 def get_alternate_file_list(fullpath):
     dir = os.path.dirname(fullpath)
@@ -50,15 +54,16 @@ def get_alternate_file_list(fullpath):
 
     for ext, alt_exts in g_alternate_mapping.items():
         ext_len = len(ext)
-        if ext_len > len(filename): 
+        if ext_len > len(filename):
             continue
         # Check whether "basename[.ext]" acutal matches
-        # Since there are some extensions contains more dots (".aspx.cs"), 
+        # Since there are some extensions contains more dots (".aspx.cs"),
         #   so we cannot just use splitext here
-        if filename[-ext_len:] != ext or filename[-ext_len - 1] != '.': 
+        if filename[-ext_len:] != ext or filename[-ext_len - 1] != '.':
             continue
         # Get basename
-        basename_len = len(filename) - ext_len - 1 # '1' taks a 'dot'
+        # '1' taks a 'dot'
+        basename_len = len(filename) - ext_len - 1
         basename = filename[:basename_len]
         for alt_ext in alt_exts:
             alt_filename = "%s.%s" % (basename, alt_ext)
@@ -66,12 +71,14 @@ def get_alternate_file_list(fullpath):
             alt_file_list.append(alt_fullpath)
     return alt_file_list
 
+
 def get_available_file_list(alt_file_list):
     avail_file_list = []
     for alt_file in alt_file_list:
         if os.path.exists(alt_file):
             avail_file_list.append(alt_file)
     return avail_file_list
+
 
 # Open the first matches file only
 def open_one_available_file(avail_file_list, window, views):
@@ -86,6 +93,7 @@ def open_one_available_file(avail_file_list, window, views):
             return
     # Open file
     window.open_file(filename)
+
 
 class AlternateFileCommand(sublime_plugin.WindowCommand):
     def run(self):
