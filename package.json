@@ -1,0 +1,8 @@
+{
+    "repo": "SublimeAlternate",
+    "name": "SublimeAlternate",
+    "description": "Alternate files (as .c=>.h and vice versa) quickly.",
+    "author": "timonwong",
+    "homepage": "https://github.com/timonwong/SublimeAlternate",
+    "platforms": ["*"]
+}

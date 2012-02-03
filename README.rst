@@ -1,26 +1,39 @@
+========================
+SublimeAlternate Plugin
+========================
+
 Introduction
-------------
-Alternate is a simple working in progress plugin for Sublime Text 2. It 
-provides simple ways to alternate files (like swithing .c to .h) by keyboard shortcuts quickly.
+============
+Alternate is a simple working in progress plugin for Sublime Text 2. It provides simple ways to alternate
+files (like swithing .c to .h) by keyboard shortcuts quickly.
 
 Installation
-------------
-* Manual Install
-    1. Go to your packages directory
-    2. Type following commands::
+============
+Manual Install
+--------------
+**Without Git:**
+`Download
+<https://github.com/timonwong/SublimeAlternate>`_ 
+the latest source code, and extract to the Packages directory.
 
-         `git clone git://github.com/timonwong/SublimeAlternate.git Alternate`
+**With Git:**
+Type the following command in your Sublime Text 2 Packages directory::
+
+         git clone git://github.com/timonwong/SublimeAlternate.git
+
+The "Packages" directory is located at:
+
+    :Windows:    ``%APPDATA%\Sublime Text 2\Packages\``
+    :Linux:      ``~/.Sublime Text 2/Packages/``
+    :OS X:       ``~/Library/Application Support/Sublime Text 2/Packages/``
 
 Usage
------
-
+=====
 Key Bindings
-~~~~~~~~~~~~
-============ ====================
-    Keys           Command
-============ ====================
-   alt+o       Alternate File
-============ ====================
+------------
+The default key bindings for this plugin:
+
+   :alt+o:       Alternate file
 
 License
 -------
