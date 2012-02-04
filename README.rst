@@ -9,6 +9,20 @@ files (like swithing .c to .h) by keyboard shortcuts quickly.
 
 Installation
 ============
+With the Package Control plugin
+-------------------------------
+The easiest way to install SublimeAStyleFormatter is through `Package Control
+<http://wbond.net/sublime_packages/package_control>`_.
+
+Once you have Package Control installed, restart Sublime Text 2.
+
+- Bring up the Command Pattle (``Ctrl+Shift+P`` on Windows and Linux. ``Command+Shift+P`` on OS X). 
+- Type "Install" and select "Package Control: Install Package".
+- Select "SublimeAStyleFormatter" from list.
+
+The advantage of using Package Control is that it will keep SublimeAStyleFormatter up to date.
+
+
 Manual Install
 --------------
 **Without Git:**
