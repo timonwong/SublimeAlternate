@@ -48,7 +48,6 @@ load_settings()
 
 
 def get_alternate_file_list(fullpath):
-    dir = os.path.dirname(fullpath)
     filename = os.path.basename(fullpath)
     alt_file_list = []
 
@@ -57,7 +56,7 @@ def get_alternate_file_list(fullpath):
         if ext_len > len(filename):
             continue
         # Check whether "basename[.ext]" acutal matches
-        # Since there are some extensions contains more dots (".aspx.cs"),
+        # Since there are some extensions contains more than one dots (".aspx.cs"),
         #   so we cannot just use splitext here
         if filename[-ext_len:] != ext or filename[-ext_len - 1] != '.':
             continue
@@ -67,32 +66,30 @@ def get_alternate_file_list(fullpath):
         basename = filename[:basename_len]
         for alt_ext in alt_exts:
             alt_filename = "%s.%s" % (basename, alt_ext)
-            alt_fullpath = os.path.join(dir, alt_filename)
-            alt_file_list.append(alt_fullpath)
+            alt_file_list.append(alt_filename)
     return alt_file_list
 
 
-def get_available_file_list(alt_file_list):
-    avail_file_list = []
+def resolve_alt_file_list(window, view, alt_file_list):
     for alt_file in alt_file_list:
-        if os.path.exists(alt_file):
-            avail_file_list.append(alt_file)
-    return avail_file_list
-
-
-# Open the first matches file only
-def open_one_available_file(avail_file_list, window, views):
-    if len(avail_file_list) == 0:
-        return False
-    filename = avail_file_list[0]
-    # Check if the file is already open but inactived.
-    for view in views:
-        if view.file_name() == filename:
-            # Switch to view
-            window.focus_view(view)
+        # Same folder as view
+        folder = os.path.dirname(view.file_name())
+        path = os.path.join(folder, alt_file)
+        if try_open(path, window):
             return
-    # Open file
-    window.open_file(filename)
+        # Project folders
+        for folder in window.folders():
+            path = os.path.join(folder, alt_file)
+            if try_open(path, window):
+                return
+
+
+# Open the first matched file only
+def try_open(path, window):
+    if not os.path.isfile(path):
+        return False
+    window.open_file(path)
+    return True
 
 
 class AlternateFileCommand(sublime_plugin.WindowCommand):
@@ -100,5 +97,4 @@ class AlternateFileCommand(sublime_plugin.WindowCommand):
         view = self.window.active_view()
         fullpath = view.file_name()
         alt_file_list = get_alternate_file_list(fullpath)
-        avail_file_list = get_available_file_list(alt_file_list)
-        open_one_available_file(avail_file_list, self.window, self.window.views())
+        resolve_alt_file_list(self.window, view, alt_file_list)
