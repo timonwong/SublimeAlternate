@@ -35,6 +35,7 @@ def add_alternate_mapping(extension, alternates):
 def load_settings():
     settings = sublime.load_settings("SublimeAlternate.sublime-settings")
     mappings = settings.get("sublime_alternate_extension_mappings", [])
+    global g_alternate_mapping
     for mapping in mappings:
         if "ext" not in mapping:
             continue
@@ -42,7 +43,7 @@ def load_settings():
             continue
         ext = mapping["ext"]
         alts = mapping["alts"]
-        add_alternate_mapping(ext, alts)
+        g_alternate_mapping[ext] = alts
 
 load_settings()
 
@@ -70,31 +71,44 @@ def get_alternate_file_list(fullpath):
     return alt_file_list
 
 
-def resolve_alt_file_list(window, view, alt_file_list):
-    for alt_file in alt_file_list:
-        # Same folder as view
-        folder = os.path.dirname(view.file_name())
-        path = os.path.join(folder, alt_file)
-        if try_open(path, window):
-            return
-        # Project folders
-        for folder in window.folders():
-            path = os.path.join(folder, alt_file)
-            if try_open(path, window):
-                return
-
-
-# Open the first matched file only
-def try_open(path, window):
-    if not os.path.isfile(path):
-        return False
-    window.open_file(path)
-    return True
-
-
 class AlternateFileCommand(sublime_plugin.WindowCommand):
+    def resolve_alt_file_list(self, alt_file_list):
+        window = self.window
+        view = window.active_view()
+        self.instance_file_list = []
+
+        # Same folder first
+        for alt_file in alt_file_list:
+            # Same folder as view
+            folder = os.path.dirname(view.file_name())
+            path = os.path.join(folder, alt_file)
+            if os.path.isfile(path):
+                self.instance_file_list.append(path)
+
+        if len(self.instance_file_list) == 1:
+            path = self.instance_file_list[0]
+            window.open_file(path)
+            self.instance_file_list = []
+            return
+
+        # Search deeper
+        for alt_file in alt_file_list:
+            for folder in window.folders():
+                path = os.path.join(folder, alt_file)
+                if os.path.isfile(path):
+                    self.instance_file_list.append(path)
+
+        # Show alternates, let user choose
+        window.show_quick_panel(self.instance_file_list, self._quick_panel_on_done)
+
+    def _quick_panel_on_done(self, picked):
+        if picked == -1:
+            return
+        filepath = self.instance_file_list[picked]
+        self.window.open_file(filepath)
+
     def run(self):
         view = self.window.active_view()
         fullpath = view.file_name()
         alt_file_list = get_alternate_file_list(fullpath)
-        resolve_alt_file_list(self.window, view, alt_file_list)
+        self.resolve_alt_file_list(alt_file_list)
