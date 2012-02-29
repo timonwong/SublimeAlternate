@@ -49,8 +49,15 @@ The default key bindings for this plugin:
 
    :alt+o:       Alternate file
 
+What's New
+==========
+v1.1 (3/1/2012)
+
+- Add ability to choose which file to open while multiple matches are found.
+
+
 License
--------
+=======
 This plugin is using MIT License.
 
 ::
