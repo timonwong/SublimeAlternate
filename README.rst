@@ -38,11 +38,12 @@ Type the following command in your Sublime Text 2 Packages directory::
 The "Packages" directory is located at:
 
     :Windows:    ``%APPDATA%\Sublime Text 2\Packages\``
-    :Linux:      ``~/.Sublime Text 2/Packages/``
+    :Linux:      ``~/.config/sublime-text-2/Packages/``
     :OS X:       ``~/Library/Application Support/Sublime Text 2/Packages/``
 
 Usage
 =====
+
 Key Bindings
 ------------
 The default key bindings for this plugin:
@@ -51,6 +52,7 @@ The default key bindings for this plugin:
 
 What's New
 ==========
+
 v1.1 (3/1/2012)
 
 - Add ability to choose which file to open while multiple matches are found.

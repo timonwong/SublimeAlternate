@@ -20,10 +20,12 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 """
 
+import os
+import sys
 import sublime
 import sublime_plugin
-import os.path
 
+PY3K = sys.version_info >= (3, 0, 0)
 g_alternate_mapping = {}
 
 
@@ -45,8 +47,11 @@ def load_settings():
         alts = mapping["alts"]
         g_alternate_mapping[ext] = alts
 
-load_settings()
+def plugin_loaded():
+    load_settings()
 
+if not PY3K:
+    plugin_loaded()
 
 def get_alternate_file_list(fullpath):
     filename = os.path.basename(fullpath)
