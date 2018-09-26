@@ -2,6 +2,10 @@
 SublimeAlternate Plugin
 ========================
 
+.. image:: https://badges.greenkeeper.io/timonwong/SublimeAlternate.svg
+   :alt: Greenkeeper badge
+   :target: https://greenkeeper.io/
+
 Introduction
 ============
 SublimeAlternate is a simple working in progress plugin for Sublime Text 2. It provides simple ways to alternate
